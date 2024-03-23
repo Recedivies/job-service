@@ -4,7 +4,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager, PermissionsMixin
 from django.db import IntegrityError, models
 
-from commons.auth_base_model import AuthBaseModel
+from commons.base_model import BaseModel
 from commons.exceptions import BadRequestException
 
 
@@ -42,7 +42,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser, PermissionsMixin, AuthBaseModel):
+class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     full_name = models.CharField(max_length=256)
     email = models.EmailField(unique=True, db_index=True)

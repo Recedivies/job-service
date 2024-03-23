@@ -49,9 +49,9 @@ INSTALLED_APPS = [
     "corsheaders",
     "commons",
     "identities",
+    "jobs",
 ]
 
-INSTALLED_APPS = ["django_cassandra_engine"] + INSTALLED_APPS
 
 AUTH_USER_MODEL = "identities.User"
 
@@ -92,19 +92,7 @@ WSGI_APPLICATION = "api.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {},
-    "cassandra": {
-        "ENGINE": "django_cassandra_engine",
-        "NAME": os.environ.get("CASS_DB_NAME"),
-        "HOST": os.environ.get("CASS_DB_HOST"),
-        "OPTIONS": {
-            "replication": {"strategy_class": "SimpleStrategy", "replication_factor": 1},
-            "connection": {
-                "port": os.environ.get("CASS_DB_PORT"),
-            },
-        },
-    },
-    "postgres": {
+    "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.environ.get("POSTGRES_DB_NAME"),
         "USER": os.environ.get("POSTGRES_DB_USER"),
@@ -192,3 +180,13 @@ LOGGER_INSTANCE = logging.getLogger("api")
 
 # type of static files storage
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}

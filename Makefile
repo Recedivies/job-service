@@ -10,7 +10,7 @@ migrate:
 test:
 	coverage run manage.py test
 
-start-db:
-	docker run -d --name law-2-cassandra -p 9042:9042 --hostname cassandra --network cassandra cassandra
+format:
+	black .; isort .; flake8 .
 
-.PHONY: server makemigrations migrate test, start-db
+.PHONY: server makemigrations migrate test format
