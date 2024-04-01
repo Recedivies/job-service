@@ -15,8 +15,8 @@ class TaskExecutionHistory(BaseModel):
         StatusType.FAILED: "Failed",
     }
 
+    execution_time = models.DateTimeField(blank=True, null=True)
     status = models.CharField(max_length=32, choices=STATUS_TYPE_CHOICES.items())
-    interval = models.CharField()
     retry_count = models.PositiveIntegerField()
     job = models.ForeignKey(to="jobs.Job", on_delete=models.CASCADE)
     user = models.ForeignKey(to="identities.User", on_delete=models.CASCADE)

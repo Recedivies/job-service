@@ -23,3 +23,13 @@ DATABASES = {
         "CONN_MAX_AGE": int(os.environ.get("CONN_MAX_AGE", 0)),
     }
 }
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.environ.get("REDIS_URI"),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}
