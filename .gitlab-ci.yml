@@ -58,10 +58,8 @@ Deploy Prod:
     - chmod 400 $SSH_PRIVATE_KEY_PROD
     - apk update && apk add openssh-client
   script:
-    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY_PROD $GCP_USERNAME_PROD@$GCP_STATIC_IP_PROD
-    - sudo su
-    - sudo apt-get install docker.io
-    - "docker container rm -f $CONTAINER_NAME_PROD || true &&
+    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY_PROD $GCP_USERNAME_PROD@$GCP_STATIC_IP_PROD "
+      docker container rm -f $CONTAINER_NAME_PROD || true &&
       docker image rm -f $REGISTRY_USER/$IMAGE_NAME_PROD:latest|| true &&
       docker run --name $CONTAINER_NAME_PROD -d -p 80:8000 --restart unless-stopped $REGISTRY_USER/$IMAGE_NAME_PROD:latest"
   only:
