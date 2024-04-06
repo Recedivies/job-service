@@ -45,3 +45,28 @@ class JobResponseSerializer(ReadOnlySerializer):
 
 class ListJobResponseSerializer(ReadOnlySerializer):
     jobs = serializers.ListField(child=JobResponseSerializer())
+
+
+class UpdateJobRequestSerializer(ReadOnlySerializer):
+    name = serializers.CharField(required=True)
+    is_recurring = serializers.BooleanField(default=False)
+    interval = serializers.CharField(required=True)
+    max_retry_count = serializers.IntegerField(required=True)
+    callback_url = serializers.URLField(required=True)
+    job_type = serializers.CharField(required=True)
+    config = serializers.JSONField(required=True)
+
+
+class UpdateJobResponseSerializer(UpdateJobRequestSerializer):
+    id = serializers.UUIDField()
+
+
+class TaskHistoryResponseSerializer(ReadOnlySerializer):
+    task_history_id = serializers.UUIDField(source="id")
+    execution_time = serializers.DateTimeField(required=True)
+    status = serializers.CharField(required=True)
+    retry_count = serializers.IntegerField(required=True)
+
+
+class ListTaskHistoryResponseSerializer(ReadOnlySerializer):
+    task_histories = serializers.ListField(child=TaskHistoryResponseSerializer())
