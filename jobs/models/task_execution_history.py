@@ -18,7 +18,7 @@ class TaskExecutionHistory(BaseModel):
     execution_time = models.DateTimeField(blank=True, null=True)
     status = models.CharField(max_length=32, choices=STATUS_TYPE_CHOICES.items())
     retry_count = models.PositiveIntegerField()
-    job = models.ForeignKey(to="jobs.Job", on_delete=models.CASCADE)
+    job = models.ForeignKey(to="jobs.Job", on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(to="identities.User", on_delete=models.CASCADE)
 
     class Meta:
