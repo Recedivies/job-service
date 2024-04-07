@@ -62,10 +62,11 @@ class UpdateJobResponseSerializer(UpdateJobRequestSerializer):
 
 
 class TaskHistoryResponseSerializer(ReadOnlySerializer):
-    task_history_id = serializers.UUIDField(source="id")
+    id = serializers.UUIDField()
     execution_time = serializers.DateTimeField(required=True)
     status = serializers.CharField(required=True)
     retry_count = serializers.IntegerField(required=True)
+    created_at = serializers.DateTimeField(required=True)
 
 
 class ListTaskHistoryResponseSerializer(ReadOnlySerializer):

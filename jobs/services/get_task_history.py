@@ -19,4 +19,5 @@ class GetTaskHistoryService(Runnable):
             execution_time=task_history.execution_time,
             status=task_history.status,
             retry_count=task_history.retry_count,
+            created_at=task_history.created_at,
         )

@@ -17,8 +17,6 @@ class ListTaskHistoryData(BaseDataClass):
 class ListTaskHistoryService(Runnable):
     @classmethod
     def run(cls, user_id: uuid.UUID) -> ListTaskHistoryData:
-        qs = TaskExecutionHistory.objects.filter(user_id=user_id).values_list(
-            "id", "execution_time", "status", "retry_count"
-        )
+        qs = TaskExecutionHistory.objects.filter(user_id=user_id)
 
         return ListTaskHistoryData(task_histories=qs)

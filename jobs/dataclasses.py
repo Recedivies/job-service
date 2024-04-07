@@ -1,4 +1,5 @@
 import uuid
+from datetime import datetime
 from typing import Any, Dict
 
 from commons.dataclasses import BaseDataClass
@@ -21,6 +22,7 @@ class JobDataClass(BaseDataClass):
 
 class TaskHistoryDataClass(BaseDataClass):
     id: uuid.UUID
-    execution_time: str
+    execution_time: datetime
     status: str
     retry_count: int
+    created_at: datetime
