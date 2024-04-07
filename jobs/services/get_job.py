@@ -11,7 +11,7 @@ class GetJobService(Runnable):
     def run(cls, user: User, job_id: str) -> JobDataClass:
         try:
             job = Job.objects.get(id=job_id)
-        except job.DoesNotExist:
+        except Job.DoesNotExist:
             raise NotFoundRequestException(JOB_NOT_FOUND)
 
         return JobDataClass(

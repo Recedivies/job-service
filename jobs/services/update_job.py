@@ -25,7 +25,7 @@ class UpdateJobService(Runnable):
     ) -> JobDataClass:
         try:
             job = Job.objects.get(id=job_id)
-        except job.DoesNotExist:
+        except Job.DoesNotExist:
             raise NotFoundRequestException(JOB_NOT_FOUND)
 
         job.name = name
